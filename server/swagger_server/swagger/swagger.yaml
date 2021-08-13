@@ -94,11 +94,11 @@ definitions:
       num1:
         type: "number"
         format: "double"
-        example: 12
+        example: 12.0
       num2:
         type: "number"
         format: "double"
-        example: 1
+        example: 1.0
       operation:
         type: "string"
         example: "add"
@@ -110,21 +110,21 @@ definitions:
     xml:
       name: "Nums"
     example:
-      num1: 12
+      num1: 12.0
       operation: "add"
-      num2: 1
+      num2: 1.0
   Results:
     type: "object"
     properties:
       result:
         type: "number"
         format: "double"
-        example: 13
+        example: 13.0
       input:
         type: "string"
         example: "12+1"
     example:
-      result: 13
+      result: 13.0
       input: "12+1"
 externalDocs:
   description: "Find out more about Swagger"
