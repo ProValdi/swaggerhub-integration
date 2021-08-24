@@ -20,7 +20,7 @@ class TestSummController(BaseTestCase):
         """
         body = Nums()
         response = self.client.open(
-            '/ProValdi/test-integrations/1.0.0/operate',
+            '/ProValdi/server/0.1.0-oas3/operate',
             method='POST',
             data=json.dumps(body),
             content_type='application/json')
@@ -33,7 +33,7 @@ class TestSummController(BaseTestCase):
         Get previous results
         """
         response = self.client.open(
-            '/ProValdi/test-integrations/1.0.0/results',
+            '/ProValdi/server/0.1.0-oas3/results',
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))

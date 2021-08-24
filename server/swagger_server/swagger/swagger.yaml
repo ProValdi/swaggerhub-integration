@@ -1,23 +1,18 @@
-openapi: 3.0.1
+openapi: 3.0.0
 info:
-  title: Swagger Balancer
-  description: "This is a sample server Petstore server.  You can find out more about\
-    \     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net,\
-    \ #swagger](http://swagger.io/irc/).      For this sample, you can use the api\
-    \ key `special-key` to test the authorization     filters."
-  termsOfService: http://swagger.io/terms/
+  title: Number Operator
+  description: This is a sample server python-flask.
   contact:
-    email: apiteam@swagger.io
+    email: prokhorov.va@phystech.edu
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 1.0.0
+  version: 1.0.0-oas3
 externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-- url: https://virtserver.swaggerhub.com/ProValdi/test-integrations/1.0.0
-- url: http://virtserver.swaggerhub.com/ProValdi/test-integrations/1.0.0
+- url: https://virtserver.swaggerhub.com/ProValdi/server/0.1.0-oas3
 tags:
 - name: summ
   description: Summ 2 numbers
@@ -41,13 +36,6 @@ paths:
       responses:
         "405":
           description: Invalid input
-          content: {}
-      security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
-      x-swagger-router-controller: swagger_server.controllers.summ_controller
-      x-codegen-request-body-name: body
       x-openapi-router-controller: swagger_server.controllers.summ_controller
   /results:
     get:
@@ -68,12 +56,6 @@ paths:
                 x-content-type: application/json
         "400":
           description: Invalid status value
-          content: {}
-      security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
-      x-swagger-router-controller: swagger_server.controllers.summ_controller
       x-openapi-router-controller: swagger_server.controllers.summ_controller
 components:
   schemas:
@@ -91,15 +73,11 @@ components:
         operation:
           type: string
           description: Types of operations
-          example: add
+          example: +
           enum:
           - +
           - "-"
           - '*'
-      example:
-        num1: 12.0
-        operation: add
-        num2: 1.0
       xml:
         name: Nums
     Results:
@@ -111,25 +89,8 @@ components:
           example: 13.0
         input:
           type: string
-          example: 12+1
+          example: 12.0+1.0
       example:
         result: 13.0
-        input: 12+1
-  securitySchemes:
-    petstore_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: http://petstore.swagger.io/oauth/dialog
-          scopes:
-            write:pets: modify pets in your account
-            read:pets: read your pets
-      x-tokenInfoFunc: swagger_server.controllers.authorization_controller.check_petstore_auth
-      x-scopeValidateFunc: swagger_server.controllers.authorization_controller.validate_scope_petstore_auth
-    api_key:
-      type: apiKey
-      name: api_key
-      in: header
-      x-apikeyInfoFunc: swagger_server.controllers.authorization_controller.check_api_key
-x-original-swagger-version: "2.0"
+        input: 12.0+1.0
 
