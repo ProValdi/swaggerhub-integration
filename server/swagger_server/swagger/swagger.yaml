@@ -1,63 +1,62 @@
 openapi: 3.0.0
 info:
-  description: >-
-    This is a sample server python-flask.
-  version: 1.0.0-oas3
-  title: "Number Operator"
+  title: Number Operator
+  description: This is a sample server python-flask.
   contact:
     email: prokhorov.va@phystech.edu
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0-oas3
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
 servers:
-  - url: 'https://localhost:8080/server/'
-    
+- url: https://localhost:8080/server/
 tags:
-  - name: summ
-    description: 'Summ 2 numbers'
-    externalDocs:
-      description: 'Find out more'
-      url: 'http://swagger.io'
+- name: summ
+  description: Summ 2 numbers
+  externalDocs:
+    description: Find out more
+    url: http://swagger.io
 paths:
   /operate:
     post:
       tags:
-        - summ
-      summary: 'operate 2 numbers'
-      description: ''
-      operationId: doAction
+      - summ
+      summary: operate 2 numbers
+      operationId: do_action
       requestBody:
+        description: 2 numbers to operate with
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Nums'
-        description: '2 numbers to operate with'
         required: true
       responses:
-        '405':
-          description: 'Invalid input'
+        "405":
+          description: Invalid input
+      x-openapi-router-controller: swagger_server.controllers.summ_controller
   /results:
     get:
       tags:
-        - summ
-      summary: 'Get previous results'
-      description: 'Multiple status values can be provided with comma separated strings'
-      operationId: getResults
+      - summ
+      summary: Get previous results
+      description: Multiple status values can be provided with comma separated strings
+      operationId: get_results
       responses:
-        '200':
-          description: 'successful operation'
+        "200":
+          description: successful operation
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Results'
-        '400':
-          description: 'Invalid status value'
-externalDocs:
-  description: 'Find out more about Swagger'
-  url: 'http://swagger.io'
-
+                x-content-type: application/json
+        "400":
+          description: Invalid status value
+      x-openapi-router-controller: swagger_server.controllers.summ_controller
 components:
   schemas:
     Nums:
@@ -66,19 +65,19 @@ components:
         num1:
           type: number
           format: double
-          example: '12.0'
+          example: 12.0
         num2:
           type: number
           format: double
-          example: '1.0'
+          example: 1.0
         operation:
           type: string
-          description: 'Types of operations'
+          description: Types of operations
+          example: +
           enum:
-            - '+'
-            - '-'
-            - '*'
-          example: '+'
+          - +
+          - "-"
+          - '*'
       xml:
         name: Nums
     Results:
@@ -87,7 +86,11 @@ components:
         result:
           type: number
           format: double
-          example: '13.0'
+          example: 13.0
         input:
           type: string
-          example: '12.0+1.0'
+          example: 12.0+1.0
+      example:
+        result: 13.0
+        input: 12.0+1.0
+
