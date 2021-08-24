@@ -1,71 +1,61 @@
-openapi: 3.0.1
+openapi: 3.0.0
 info:
-  title: Swagger Balancer
-  description: "This is a sample server Petstore server.  You can find out more about\
-    \     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net,\
-    \ #swagger](http://swagger.io/irc/).      For this sample, you can use the api\
-    \ key `special-key` to test the authorization     filters."
-  termsOfService: http://swagger.io/terms/
+  description: >-
+    This is a sample server python-flask.
+  version: 1.0.0-oas3
+  title: "Number Operator"
   contact:
-    email: apiteam@swagger.io
+    email: prokhorov.va@phystech.edu
   license:
     name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 1.0.0
-externalDocs:
-  description: Find out more about Swagger
-  url: http://swagger.io
-servers:
-- url: https://petstore.swagger.io/v2
-- url: http://petstore.swagger.io/v2
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 tags:
-- name: summ
-  description: Summ 2 numbers
-  externalDocs:
-    description: Find out more
-    url: http://swagger.io
+  - name: summ
+    description: 'Summ 2 numbers'
+    externalDocs:
+      description: 'Find out more'
+      url: 'http://swagger.io'
 paths:
-  /summ:
+  /operate:
+    post:
+      tags:
+        - summ
+      summary: 'operate 2 numbers'
+      description: ''
+      operationId: doAction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Nums'
+        description: '2 numbers to operate with'
+        required: true
+      responses:
+        '405':
+          description: 'Invalid input'
+  /results:
     get:
       tags:
-      - summ
-      summary: Get previous results
-      description: Multiple status values can be provided with comma separated strings
-      operationId: get_results
+        - summ
+      summary: 'Get previous results'
+      description: 'Multiple status values can be provided with comma separated strings'
+      operationId: getResults
       responses:
-        "200":
-          description: successful operation
+        '200':
+          description: 'successful operation'
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Results'
-                x-content-type: application/json
-        "400":
-          description: Invalid status value
-          content: {}
-      x-swagger-router-controller: swagger_server.controllers.summ_controller
-      x-openapi-router-controller: swagger_server.controllers.summ_controller
-    post:
-      tags:
-      - summ
-      summary: summ 2 numbers
-      operationId: summ2_nums
-      requestBody:
-        description: 2 numbers to operate with
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Nums'
-        required: true
-      responses:
-        "405":
-          description: Invalid input
-          content: {}
-      x-swagger-router-controller: swagger_server.controllers.summ_controller
-      x-codegen-request-body-name: body
-      x-openapi-router-controller: swagger_server.controllers.summ_controller
+        '400':
+          description: 'Invalid status value'
+externalDocs:
+  description: 'Find out more about Swagger'
+  url: 'http://swagger.io'
+servers:
+  - url: 'https://virtserver.swaggerhub.com/ProValdi/server/0.1.0-oas3'
 components:
   schemas:
     Nums:
@@ -74,23 +64,19 @@ components:
         num1:
           type: number
           format: double
-          example: 12.0
+          example: '12.0'
         num2:
           type: number
           format: double
-          example: 1.0
+          example: '1.0'
         operation:
           type: string
-          description: Types of operations
-          example: add
+          description: 'Types of operations'
           enum:
-          - '*'
-          - +
-          - "-"
-      example:
-        num1: 12
-        operation: add
-        num2: 1
+            - '+'
+            - '-'
+            - '*'
+          example: '+'
       xml:
         name: Nums
     Results:
@@ -99,12 +85,7 @@ components:
         result:
           type: number
           format: double
-          example: 13.0
+          example: '13.0'
         input:
           type: string
-          example: 12+1
-      example:
-        result: 13
-        input: 12+1
-x-original-swagger-version: "2.0"
-
+          example: '12.0+1.0'
