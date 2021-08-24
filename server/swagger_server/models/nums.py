@@ -14,7 +14,6 @@ class Nums(Model):
 
     Do not edit the class manually.
     """
-
     def __init__(self, num1: float=None, num2: float=None, operation: str=None):  # noqa: E501
         """Nums - a model defined in Swagger
 
@@ -36,7 +35,6 @@ class Nums(Model):
             'num2': 'num2',
             'operation': 'operation'
         }
-
         self._num1 = num1
         self._num2 = num2
         self._operation = operation
@@ -114,7 +112,7 @@ class Nums(Model):
         :param operation: The operation of this Nums.
         :type operation: str
         """
-        allowed_values = ["+", "-", "*"]  # noqa: E501
+        allowed_values = ["*", "+", "-"]  # noqa: E501
         if operation not in allowed_values:
             raise ValueError(
                 "Invalid value for `operation` ({0}), must be one of {1}"
