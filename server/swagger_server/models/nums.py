@@ -112,7 +112,7 @@ class Nums(Model):
         :param operation: The operation of this Nums.
         :type operation: str
         """
-        allowed_values = ["*", "+", "-"]  # noqa: E501
+        allowed_values = ["+", "-", "*"]  # noqa: E501
         if operation not in allowed_values:
             raise ValueError(
                 "Invalid value for `operation` ({0}), must be one of {1}"
